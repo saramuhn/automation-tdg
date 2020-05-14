@@ -1,0 +1,82 @@
+plugins {
+    id 'java'
+    id 'java-library'
+    id 'jacoco'
+    id 'idea'
+    id 'maven-publish'
+    id 'application'
+    id 'org.sonarqube' version "2.7.1"
+}
+
+compileJava{
+    options.encoding('UTF-8')
+}
+compileTestJava{
+    options.encoding('UTF-8')
+}
+
+setMainClassName "co.com.sofka.nopcommerce.test"
+group "co.com.sofka.nopcommerce.test"
+version '1.0.0'
+setSourceCompatibility  JavaVersion.VERSION_1_8
+setTargetCompatibility  JavaVersion.VERSION_1_8
+
+wrapper {
+    gradleVersion '5.4.1'
+    distributionType Wrapper.DistributionType.ALL
+}
+
+repositories {
+    jcenter()
+    mavenCentral()
+    maven {
+        url "https://mymavenrepo.com/repo/Dw3PQf7ouaoDzyqMPoa5/"
+        credentials {
+            username = "myMavenRepo"
+            password = "Testing2020"
+        }
+    }
+}
+dependencies {
+
+    api 'co.com.sofka.test:Automation:3.0.4'
+
+    api 'io.cucumber:cucumber-java:4.2.0'
+    api 'io.cucumber:cucumber-junit:4.2.0'
+
+    compileOnly fileTree(dir: 'libs', include: '*.jar')
+}
+
+jacoco {
+    toolVersion = "0.8.3"
+    reportsDir = file("$buildDir/customJacocoReportDir")
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled false
+        csv.enabled false
+        html.destination file("${buildDir}/jacocoHtml")
+    }
+}
+
+sonarqube {
+    properties {
+        property "sonar.exclusions", "**/*Generated.java"
+        property "sonar.jacoco.itReportPaths", "${buildDir}/jacoco/test.exec"
+    }
+}
+
+tasks.sonarqube.dependsOn(build)
+
+test {
+    reports.junitXml.setEnabled(false)
+    reports.html.setEnabled(false)
+
+  //  maxParallelForks  1
+
+    testLogging {
+        exceptionFormat = 'full'
+    }
+}
+
