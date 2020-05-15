@@ -18,8 +18,8 @@ Feature: Pruebas a demo de compras online
     Examples:
       | categoria disponible |
       | Desktops             |
-      | Notebooks            |
-      | Software             |
+#      | Notebooks            |
+#      | Software             |
 
 #Escenario 2
   @ScenarioName:FiltroPorPrecio
@@ -31,11 +31,11 @@ Feature: Pruebas a demo de compras online
     Examples:
       | categoria disponible | filtro    |
       | Desktops             | -1000     |
-      | Desktops             | 1000-1200 |
-      | Desktops             | 1200-     |
-      | Notebooks            | -1000     |
-      | Notebooks            | 1000-1200 |
-      | Notebooks            | 1200-     |
+#      | Desktops             | 1000-1200 |
+#      | Desktops             | 1200-     |
+#      | Notebooks            | -1000     |
+#      | Notebooks            | 1000-1200 |
+#      | Notebooks            | 1200-     |
 
     #Escenario 3
 
@@ -48,10 +48,10 @@ Feature: Pruebas a demo de compras online
     Examples:
       | categoria | medio       | cantidad |
       | Desktops  | wishlist    | 1        |
-      | Desktops  | add to cart | 3        |
-      | Notebooks | wishlist    | 1        |
-      | Notebooks | add to cart | 3        |
-      | Software  | wishlist    | 1        |
-      | Software  | add to cart | 3        |
+#      | Desktops  | add to cart | 3        |
+#      | Notebooks | wishlist    | 1        |
+#      | Notebooks | add to cart | 3        |
+#      | Software  | wishlist    | 1        |
+#      | Software  | add to cart | 3        |
 
 

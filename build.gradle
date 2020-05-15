@@ -21,6 +21,12 @@ version '1.0.0'
 setSourceCompatibility  JavaVersion.VERSION_1_8
 setTargetCompatibility  JavaVersion.VERSION_1_8
 
+jar {
+    manifest {
+        attributes 'Main-Class': 'co.com.sofka.nopcommerce.test'
+    }
+}
+
 wrapper {
     gradleVersion '5.4.1'
     distributionType Wrapper.DistributionType.ALL

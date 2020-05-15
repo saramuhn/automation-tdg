@@ -1,6 +1,5 @@
 package co.com.sofka.webProject.test.controllers;
 
-import co.com.client.webProject.test.page.PageMyAccount;
 import co.com.sofka.test.evidence.reports.Assert;
 import co.com.sofka.webProject.test.internalaction.InternalActionWeb;
 import co.com.sofka.test.automationtools.selenium.Browser;
@@ -8,8 +7,10 @@ import co.com.sofka.test.evidence.reports.Report;
 import co.com.sofka.test.exceptions.WebActionsException;
 import co.com.sofka.webProject.test.page.HomePage;
 import co.com.sofka.webProject.test.page.PageCategory;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -43,8 +44,21 @@ public class DisplaycomputersController {
         browser.setBrowser(Browser.Browsers.CHROME);
         browser.setMaximized(true);
         browser.setIncognito(true);
-        browser.setDriverVersion("72.0.3626.69");
+        browser.setDriverVersion("81.0.4044.138");
         browser.setAutoDriverDownload(true);
+       // browser.setHeadless(true);
+        ChromeOptions options=new ChromeOptions();
+        options.addArguments("--disable-setuid-sandbox");
+        options.addArguments("--disable-seccomp-filter-sandbox");
+        options.addArguments("--disable-dev-shm-usage");
+        options.addArguments("--headless");
+        options.addArguments("--disable-gpu ");
+        options.addArguments("--window-size=1920,1080");
+        browser.setChromeOptions(options);
+        HashMap<String, Object> chromePrefs = new HashMap();
+        chromePrefs.put("profile.default_content_settings.popups", 0);
+        chromePrefs.put("browser.setDownloadBehavior", "allow");
+        browser.setChromePrefs(chromePrefs);
 
         try {
             internalActionWeb.startWebApp(browser, url, validFeature, validScenario);
@@ -54,6 +68,7 @@ public class DisplaycomputersController {
             Report.reportScreenshot(internalActionWeb);
             Report.reportFailure(String.format(MSG_ERROR, ACCION), e);
         }
+
     }
 
     public void mostrarCategorias() throws WebActionsException {
